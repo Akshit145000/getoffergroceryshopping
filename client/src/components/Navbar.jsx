@@ -14,7 +14,7 @@ export default function Navbar() {
           onClick={() => navigate("/")}
           className="text-2xl font-bold text-gray-800 cursor-pointer"
         >
-          <img width={80} height={80} src="./logo.png" alt="Logo" />
+          <img width={80} height={80} src="/logo.png" alt="Logo" />
         </div>
 
         {/* Cart Section */}
