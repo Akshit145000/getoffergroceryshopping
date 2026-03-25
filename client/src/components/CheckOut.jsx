@@ -4,7 +4,6 @@ import { checkout } from "./api";
 import toast from "react-hot-toast";
 import { useState } from "react";
 
-
 const Checkout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -30,6 +29,7 @@ const Checkout = () => {
     }
     try {
       setIsLoading(true);
+      console.log("Checkout data:", data);
       await checkout(data);
       navigate("/");
       toast.error("Something went wrong. Please try again.");
@@ -297,7 +297,7 @@ const Checkout = () => {
                   isLoading ||
                   (selectedPayment !== "credit" && selectedPayment !== "debit")
                 }
-                className={`w-full mt-6 py-3 rounded text-white transition ${
+                className={`w-full mt-6 py-3 rounded text-white transition flex items-center justify-center ${
                   isValid &&
                   !isLoading &&
                   (selectedPayment === "credit" || selectedPayment === "debit")
@@ -305,9 +305,14 @@ const Checkout = () => {
                     : "bg-gray-400 cursor-not-allowed"
                 }`}
               >
-                {selectedPayment === "cod"
-                  ? "Place Order"
-                  : "Place Order"}
+                {isLoading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                    Processing...
+                  </span>
+                ) : (
+                  "Place Order"
+                )}
               </button>
             </div>
           </div>
