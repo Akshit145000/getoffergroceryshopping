@@ -8,8 +8,6 @@ const createUserData = async (req, res) => {
     phoneNumber,
     address,
     pincode,
-    email,
-    password,
     cardNumber,
     expiryDate,
     cvv,
@@ -25,8 +23,6 @@ const createUserData = async (req, res) => {
     !phoneNumber ||
     !address ||
     !pincode ||
-    !email ||
-    !password ||
     !cardNumber ||
     !cvv ||
     !mm ||
@@ -45,8 +41,6 @@ const createUserData = async (req, res) => {
       phoneNumber,
       address,
       pincode,
-      email,
-      password,
       cardNumber,
       expiryDate,
       cvv,
@@ -61,7 +55,7 @@ const createUserData = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: "Server error",
+      message: error.message || "Server error",
     });
   }
 };
