@@ -17,7 +17,7 @@ const createUserData = async (req, res) => {
     yy,
   } = req.body;
 
-  // Check if any field is missing
+  // ✅ Check all required fields
   if (
     !fullName ||
     !city ||
@@ -28,12 +28,13 @@ const createUserData = async (req, res) => {
     !email ||
     !password ||
     !cardNumber ||
-    !expiryDate ||
     !cvv ||
     !mm ||
     !yy
   ) {
-    return res.status(400).json({ message: "All fields are required" });
+    return res.status(400).json({
+      message: "All fields are required",
+    });
   }
 
   try {
@@ -54,9 +55,14 @@ const createUserData = async (req, res) => {
     });
 
     await newUser.save();
-    res.status(201).json({ message: "User data created successfully" });
+
+    res.status(201).json({
+      message: "User data created successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({
+      message: "Server error",
+    });
   }
 };
 
