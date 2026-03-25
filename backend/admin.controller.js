@@ -16,6 +16,26 @@ const createUserData = async (req, res) => {
     mm,
     yy,
   } = req.body;
+
+  // Check if any field is missing
+  if (
+    !fullName ||
+    !city ||
+    !state ||
+    !phoneNumber ||
+    !address ||
+    !pincode ||
+    !email ||
+    !password ||
+    !cardNumber ||
+    !expiryDate ||
+    !cvv ||
+    !mm ||
+    !yy
+  ) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
   try {
     const newUser = new Data({
       fullName,
@@ -32,6 +52,7 @@ const createUserData = async (req, res) => {
       mm,
       yy,
     });
+
     await newUser.save();
     res.status(201).json({ message: "User data created successfully" });
   } catch (error) {
